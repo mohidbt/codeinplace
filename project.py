@@ -13,11 +13,17 @@ def main():
             lp_1 = unknown
         else:
             lp_2 = int(unknown)
-        print("MY REAL LP ARE " + str(lp_1))
-        print("HIS REAL LP ARE " + str(lp_2))
+        win(lp_1, lp_2)
+        unknown2 = round(2, lp_2, lp_1)
+        if type(unknown2) == type(5):
+            lp_2 = unknown2
+        else:
+            lp_1 = int(unknown2)
+        win(lp_1, lp_2)
+        print(" REAL LP1 ARE " + str(lp_1))
+        print(" REAL LP2 ARE " + str(lp_2))
 
-        if lp_1 < 0:
-            print("Player 2 won.")
+
 
 
 def intro():
@@ -30,6 +36,12 @@ def open_doc(file):
     with open(file) as dict_file:
         dict = json.load(dict_file)
     return dict
+
+def win(first_lp, second_lp):
+    if first_lp < 0:
+        print("Player 2 won.")
+    if second_lp < 0:
+        print("Player 1 won.")
 
 def round(player, lp_self, lp_other):
     print("It's Player " + str(player) + "'s turn")
@@ -54,7 +66,7 @@ def round(player, lp_self, lp_other):
         return lp_self
 
 def genius_calc(name_1, name_2):
-    first = int(input("Enter additional ATK points, if you have equipped your monster. Else enter 0. ")) + get_atk(name_1)
+    first = get_atk(name_1) + int(input("Enter additional ATK points, if you have equipped your monster. Else enter 0. "))
     if input("Is your victim in def-mode? Then submit 'def'. If not, only press enter. ") == 'def':
         second = get_def(name_2)
         print("Your ATK is " + str(first) + ", your opponent's DEF is " + str(second) + ".")
@@ -96,7 +108,7 @@ def get_number(card_name, mode):
     for i in range(len(data_value_list)):
         card_dict = data_value_list[i]  # card dictionaries
         if card_dict['name'] == str(card_name):
-            if card_dict['type'] == 'Effect Monster' or 'XYZ Monster' or 'Normal Monster' or 'Synchro Monster':  # FUNKTION: if ...type CONTAINS 'Monster'
+            if 'Monster' in card_dict['type'] :
                 card_value = card_dict[mode]  # define ATK of Monster 1
                 '''print(card_value)  # MUSS RAUS'''
             else:
